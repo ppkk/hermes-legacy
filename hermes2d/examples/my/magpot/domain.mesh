@@ -1,0 +1,24 @@
+
+a = 1.0 
+b = 1.5
+
+vertices =
+{
+  { 0, -a },    # vertex 0
+  { b, -a },    # vertex 1
+  { b, a },    # vertex 2
+  { 0, a }     # vertex 3
+}
+
+elements =
+{
+  { 0, 1, 2, 3, 0 }  # quad 0
+}
+
+boundaries =
+{
+  { 0, 1, 1 },
+  { 1, 2, 2 },
+  { 2, 3, 3 },
+  { 3, 0, 4 }
+}

@@ -13,4 +13,4 @@ add_subdirectory(richards)
 add_subdirectory(schroedinger)
 add_subdirectory(thermoelasticity)
 add_subdirectory(wave-equation)
-
+add_subdirectory(my)
