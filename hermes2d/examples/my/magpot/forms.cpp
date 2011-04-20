@@ -5,9 +5,11 @@ Scalar bilinear_form(int n, double *wt, Func<Scalar> *u_ext[], Func<Real> *u,
   double perm=4*M_PI*1e-7; // permeabilita vakua
   Scalar result = 0;
   for (int i = 0; i < n; i++){
-    result += 1/perm * wt[i] * (u->dx[i] * v->dx[i] + u->dy[i] * v->dy[i] 
-                                 - u->dx[i]/e->x[i] * v->val[i] 
-                                + u->val[i]/sqr(e->x[i]) * v->val[i]
+    result += 1/(perm) * RelPermInv<Real, Scalar>(e->x[i], e->y[i]) * wt[i] * (  
+                             u->dx[i] * v->dx[i] + u->dy[i] * v->dy[i] 
+                           - u->dx[i]/e->x[i] * v->val[i] 
+                           + u->val[i]/sqr(e->x[i]) * v->val[i]
+                           + jj * FREQ * Gamma<Real, Scalar>(e->x[i], e->y[i]) * u->val[i] * v->val[i]
     ); 
   }
   return result;
@@ -19,7 +21,7 @@ Scalar linear_form(int n, double *wt, Func<Scalar> *u_ext[], Func<Real> *v,
 {
   Scalar result = 0;
   for (int i = 0; i < n; i++) {
-    result += -wt[i] * ( F<Real, Scalar>(e->x[i], e->y[i]) * v->val[i]);          
+    result += wt[i] * (F<Real, Scalar>(e->x[i], e->y[i]) * v->val[i]);          
   }
 
   return result;
